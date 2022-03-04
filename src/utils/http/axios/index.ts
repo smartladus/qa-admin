@@ -110,7 +110,12 @@ const transform: AxiosTransform = {
     } else {
       if (!isString(params)) {
         formatDate && formatRequestDate(params);
-        if (Reflect.has(config, 'data') && config.data && Object.keys(config.data).length > 0) {
+        // smartladu: 这里新增了判断，如果config.data是FormData则不进行替换，用于兼容文件上传
+        if (
+          Reflect.has(config, 'data') &&
+          config.data &&
+          (config.data instanceof FormData || Object.keys(config.data).length > 0)
+        ) {
           config.data = data;
           config.params = params;
         } else {

@@ -1,7 +1,10 @@
 import { UploadApiResult } from './model/uploadModel';
 import { defHttp } from '/@/utils/http/axios';
-import { UploadFileParams } from '/#/axios';
+import { RequestOptions, UploadFileParams } from '/#/axios';
 import { useGlobSetting } from '/@/hooks/setting';
+import { UploadFile } from 'ant-design-vue/es/upload/interface';
+import { ContentTypeEnum } from '/@/enums/httpEnum';
+import { AxiosRequestConfig } from 'axios';
 
 const { uploadUrl = '' } = useGlobSetting();
 
@@ -20,3 +23,27 @@ export function uploadApi(
     params,
   );
 }
+
+export const uploadFile = (
+  fileList: UploadFile[],
+  multi: boolean,
+  config: AxiosRequestConfig,
+  options?: RequestOptions,
+) => {
+  const formData = new window.FormData();
+  multi
+    ? fileList.forEach((file) => formData.append('files[]', file.originFileObj))
+    : formData.append('file', fileList[0].originFileObj);
+  return defHttp.post(
+    {
+      ...config,
+      data: formData,
+      headers: {
+        'Content-type': ContentTypeEnum.FORM_DATA,
+        // @ts-ignore
+        ignoreCancelToken: true,
+      },
+    },
+    options,
+  );
+};
