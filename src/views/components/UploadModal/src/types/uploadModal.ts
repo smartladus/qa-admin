@@ -1,13 +1,6 @@
-import { UploadFile } from 'ant-design-vue/es/upload/interface';
+import { UploadApi } from '/@/api/sys/model/uploadModel';
 
-export type UploadApi = (
-  fileList: UploadFile[],
-  multi?: boolean,
-  mode?: string,
-  onUploadProgress?: (progressEvent: ProgressEvent) => void,
-) => Promise<any>;
-
-export interface UploadSetting {
+export interface UploadModalSetting {
   title?: string;
   messageOfAdd?: string;
   messageOfReplace?: string;
