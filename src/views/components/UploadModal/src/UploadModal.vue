@@ -104,7 +104,7 @@
 
   const okBtnLoading = ref(false);
   const handleUpload = async () => {
-    let { uploadApi, onUploadProgress } = props;
+    let { uploadApi } = props;
     okBtnLoading.value = true;
     // 未设置UploadApi则发出提示并停止OK按钮的loading
     if (!uploadApi) {
@@ -114,15 +114,15 @@
     }
 
     try {
-      const res = await uploadApi(
-        toRaw(unref(fileList)),
-        false,
-        mode.value,
-        onUploadProgress
-          ? onUploadProgress
-          : (e) =>
-              console.log(`onUploadProgress is not set, this is default function, event: ${e}`),
-      );
+      const res = await uploadApi({
+        fileList: toRaw(unref(fileList)),
+        multi: false,
+        mode: mode.value,
+        onUploadProgress:
+          props?.onUploadProgress ??
+          ((e) =>
+            console.log(`onUploadProgress is not set, this is default function, event: ${e}`)),
+      });
       console.log(res);
       notification.success({
         message: '文件上传成功',
