@@ -21,6 +21,10 @@ import {
   TreeSelect,
   Spin,
   Col,
+  Collapse,
+  Empty,
+  Typography,
+  DatePicker,
 } from 'ant-design-vue';
 import MavonEditor from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
@@ -48,5 +52,9 @@ export function registerGlobComp(app: App) {
     .use(TreeSelect)
     .use(Spin)
     .use(Col)
-    .use(MavonEditor);
+    .use(MavonEditor)
+    .use(Collapse)
+    .use(Empty)
+    .use(Typography)
+    .use(DatePicker);
 }
