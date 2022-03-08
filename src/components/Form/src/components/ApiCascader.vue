@@ -26,6 +26,7 @@
   import { get, omit } from 'lodash-es';
   import { useRuleFormItem } from '/@/hooks/component/useFormItem';
   import { LoadingOutlined } from '@ant-design/icons-vue';
+  import { useI18n } from '/@/hooks/web/useI18n';
 
   interface Option {
     value: string;
@@ -79,6 +80,7 @@
 
       // Embedded in the form, just use the hook binding to perform form verification
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
+      const { t } = useI18n();
 
       watch(
         apiData,
@@ -191,6 +193,7 @@
         handleChange,
         loadData,
         handleRenderDisplay,
+        t,
       };
     },
   });
