@@ -163,7 +163,8 @@
           currentValueRef.value = (e as ChangeEvent).target.value;
         } else if (component === 'Checkbox') {
           currentValueRef.value = (e as ChangeEvent).target.checked;
-        } else if (isString(e) || isBoolean(e) || isNumber(e)) {
+        } else if (isString(e) || isBoolean(e) || isNumber(e) || isArray(e)) {
+          // smartladu：如果是级联选择或多选的select会返回数组，所以增加判断isArray，如果这里不赋值会选不上
           currentValueRef.value = e;
         }
         const onChange = unref(getComponentProps)?.onChange;
