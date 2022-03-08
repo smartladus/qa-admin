@@ -161,6 +161,10 @@ export function useTable(tableProps?: Props): [
     scrollTo: (pos: string) => {
       getTableInstance().scrollTo(pos);
     },
+    // smartladu: 定义获取RowKey的方法
+    getRowKey: () => {
+      return getTableInstance().getRowKey();
+    },
   };
 
   return [register, methods];

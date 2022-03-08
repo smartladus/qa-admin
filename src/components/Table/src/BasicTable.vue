@@ -134,6 +134,7 @@
         getSelectRowKeys,
         deleteSelectRowByKey,
         setSelectedRowKeys,
+        getComputedRowKey,
       } = useRowSelection(getProps, tableData, emit);
 
       const {
@@ -313,6 +314,10 @@
         scrollTo,
         getSize: () => {
           return unref(getBindValues).size as SizeType;
+        },
+        // smartladu: 定义获取RowKey的方法
+        getRowKey: () => {
+          return unref(getComputedRowKey) as string;
         },
       };
       createTableContext({ ...tableAction, wrapRef, getBindValues });

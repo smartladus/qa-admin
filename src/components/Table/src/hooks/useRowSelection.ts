@@ -31,7 +31,9 @@ export function useRowSelection(
   watch(
     () => unref(propsRef).rowSelection?.selectedRowKeys,
     (v: string[]) => {
-      setSelectedRowKeys(v);
+      // setSelectedRowKeys(v);
+      // smartladu: 为了切换打开批量操作的开关，这里需要确认v存在，v.includes是方法再调用设置RowKey
+      v && isFunction(v.includes) && setSelectedRowKeys(v);
     },
   );
 
@@ -118,5 +120,6 @@ export function useRowSelection(
     clearSelectedRowKeys,
     deleteSelectRowByKey,
     setSelectedRows,
+    getComputedRowKey: getRowKey, // smartladu: 暴露最终计算得到的rowKey
   };
 }
