@@ -6,12 +6,12 @@
     <template #extra>
       <a-space v-if="curMode === 'edit'">
         <slot name="action-of-edit"></slot>
-        <a-button @click="handleCancel">取消</a-button>
-        <a-button type="primary" @click="handleSave">确认</a-button>
+        <a-button @click="handleCancel" size="small">取消</a-button>
+        <a-button type="primary" @click="handleSave" size="small">确认</a-button>
       </a-space>
       <a-space v-else>
         <slot name="action-of-preview"></slot>
-        <a-button type="primary" ghost @click="setMode('edit')">编辑</a-button>
+        <a-button type="primary" ghost @click="setMode('edit')" size="small">编辑</a-button>
       </a-space>
     </template>
     <mavon-editor
