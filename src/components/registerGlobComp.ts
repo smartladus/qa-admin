@@ -25,6 +25,7 @@ import {
   Empty,
   Typography,
   DatePicker,
+  Timeline,
 } from 'ant-design-vue';
 import MavonEditor from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
@@ -56,5 +57,6 @@ export function registerGlobComp(app: App) {
     .use(Collapse)
     .use(Empty)
     .use(Typography)
-    .use(DatePicker);
+    .use(DatePicker)
+    .use(Timeline);
 }
