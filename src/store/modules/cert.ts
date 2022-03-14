@@ -4,6 +4,7 @@ import { getAllCertRegions } from '/@/api/cert/region';
 import { RegionModel } from '/@/api/cert/model/regionModel';
 import { getAllCertCategories } from '/@/api/cert/category';
 import { CategoryModel } from '/@/api/cert/model/categoryModel';
+import { getAllCertTasksStats } from '/@/api/cert/task';
 
 export const useCertStore = defineStore({
   id: 'app-cert',
@@ -13,19 +14,12 @@ export const useCertStore = defineStore({
       certTypes: ['Safety', 'EMC', 'RF', 'ECO'],
       regions: [] as RegionModel[],
       categories: [] as CategoryModel[],
+      taskStats: [] as { value: string; label: string; color: string }[],
       certMethodMap: [
         { label: '原型', value: 'ORIG' },
         { label: '派生', value: 'DERI' },
         { label: '自我声明', value: 'SDoC' },
         { label: '变更', value: 'CHAN' },
-      ],
-      taskStatMap: [
-        { label: '新建', value: 'NEW', color: 'blue' },
-        { label: '资料准备', value: 'DOC_PREPARE', color: 'blue' },
-        { label: '型式试验', value: 'TEST', color: 'blue' },
-        { label: '获证', value: 'GET_CERT', color: 'blue' },
-        { label: '已完成', value: 'DONE', color: 'green' },
-        { label: '已取消', value: 'CANCELLED', color: 'gray' },
       ],
     };
   },
@@ -34,7 +28,6 @@ export const useCertStore = defineStore({
       return state[columnIndex].map((option) => ({ label: option, value: option })) ?? [];
     },
     getRegionOptions: (state) => {
-      console.log('getting region options');
       return state.continents
         .filter((continent) => state.regions.find((region) => region.continent === continent))
         .map((continent) => {
@@ -55,16 +48,17 @@ export const useCertStore = defineStore({
     },
     getCertMethodLabelByVal: (state) => (val) =>
       state.certMethodMap.find((method) => method.value === val)?.label ?? '未知获证方式',
-    getTaskStatByVal: (state) => (val) =>
-      state.taskStatMap.find((method) => method.value === val) ?? {
-        label: '未知状态',
-        color: 'error',
-      },
     getCategoriesOptionsByRegion: (state) => (region) => {
       return state.categories
         .filter((category) => category.region === region)
         .map((category) => ({ label: category.certName, value: category.certName }));
     },
+    getTaskStatByVal: (state) => (val) =>
+      state.taskStats.find((taskStat) => taskStat.value === val) ?? {
+        label: '未知状态',
+        value: 'unknown',
+        color: 'default',
+      },
   },
   actions: {
     async updateRegions() {
@@ -81,10 +75,41 @@ export const useCertStore = defineStore({
         console.log(error);
       }
     },
+    async updateTaskStats() {
+      try {
+        this.taskStats = (await getAllCertTasksStats()).map((stat) => {
+          let color;
+          switch (stat.type) {
+            case 'PROCESSING':
+              color = 'processing';
+              break;
+            case 'ERROR':
+              color = 'error';
+              break;
+            case 'SUCCESS':
+              color = 'success';
+              break;
+            case 'INVALID':
+              color = 'gray';
+              break;
+            default:
+              color = 'default';
+          }
+          return {
+            value: stat.state,
+            label: stat.label,
+            color,
+          };
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     init() {
       console.log('init cert store');
       this.updateRegions();
       this.updateCategories();
+      this.updateTaskStats();
     },
   },
 });
