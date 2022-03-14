@@ -4,7 +4,7 @@
       @register="register"
       :table-config="taskTableConfig"
       :defaultAction="false"
-      @new="createTask"
+      @new="handleEdit"
     >
       <template #bodyCell="{ column, record: task }">
         <template v-if="column.key === 'oaNo'">
@@ -41,9 +41,7 @@
           </a-popover>
         </template>
         <template v-if="column.key === 'taskStat'">
-          <a-tag :color="getTaskStatByVal(task.taskStat).color">
-            {{ getTaskStatByVal(task.taskStat).label }}
-          </a-tag>
+          <TaskStatTag :task-stat="task.taskStat" />
         </template>
         <template v-if="column.key === 'startDate'">
           <span>{{ dateFormat(task.startDate, 'YYYY-MM-DD') }}</span>
@@ -62,17 +60,20 @@
         <TableAction :actions="createActions(record, column)" />
       </template>
     </StdTable>
-    <TaskEditDrawer @register="drawerReg" />
+    <TaskEditDrawer destroyOnClose @register="drawerReg" />
   </PageWrapper>
 </template>
 
-<script setup lang="ts" name="TaskEditDrawer">
+<script setup lang="ts" name="Tasks">
+  import { getCurrentInstance, provide, ref } from 'vue';
   import { PageWrapper } from '/@/components/Page';
   import { TaskModel } from '/@/api/cert/model/taskModel';
   import { useDrawer } from '/@/components/Drawer';
   import { StdTable } from '/@/views/components/StdTable';
   import TaskEditDrawer from './TaskEditDrawer/TaskEditDrawer.vue';
+  import { useMessage } from '/@/hooks/web/useMessage';
   import taskTableConfig from '/@/views/cert/tasks/taskTableConfig';
+  import TaskStatTag from './TaskStatTag/TaskStatTag.vue';
   import {
     TableAction,
     ActionItem,
@@ -83,24 +84,18 @@
   import { useFilter } from '/@/hooks/useFilter';
   import { useCertStore } from '/@/store/modules/cert';
   import { storeToRefs } from 'pinia';
+  import { deleteCertTaskByTaskNo } from '/@/api/cert/task';
 
-  const [
-    register,
-    {
-      insertTableDataRecord,
-      scrollTo,
-      setProps,
-      deleteTableDataRecord,
-      getRowKey,
-      setLoading,
-      reload,
-    },
-  ] = useTable({});
+  let { proxy } = getCurrentInstance();
+  const { notification } = useMessage();
+
+  const [register, { reload }] = useTable({});
 
   const { numberFormat, replaceDivider, dateFormat } = useFilter();
 
   const certStore = useCertStore();
-  const { getCertMethodLabelByVal, getTaskStatByVal } = storeToRefs(certStore);
+  certStore.init();
+  const { getCertMethodLabelByVal } = storeToRefs(certStore);
 
   function createActions(record: EditRecordRow, column: BasicColumn): ActionItem[] {
     return [
@@ -123,16 +118,23 @@
 
   const [drawerReg, { openDrawer }] = useDrawer();
 
-  const handleEdit = (task: Recordable<TaskModel>) => {
-    openDrawer(true, task.taskNo);
+  proxy.$bus.on('TASK_UPDATE', () => reload());
+
+  const editingTaskNo = ref<string | undefined>(undefined);
+  provide('editingTaskNo', editingTaskNo);
+
+  const handleEdit = (task?: Recordable<TaskModel>) => {
+    openDrawer(true);
+    editingTaskNo.value = (task?.taskNo as unknown as string) ?? 'new';
   };
 
-  const createTask = () => {
-    openDrawer(true, 'new');
-  };
-
-  const handleDelete = (task: Recordable) => {
-    console.log('deleting', task.taskNo);
+  const handleDelete = async (task: Recordable) => {
+    let count = await deleteCertTaskByTaskNo(task.taskNo);
+    notification.success({
+      message: `成功删除 ${count} 条记录`,
+      description: `${task.taskNo} 已删除`,
+    });
+    await reload();
   };
 </script>
 
