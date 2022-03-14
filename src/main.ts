@@ -14,9 +14,12 @@ import { setupStore } from '/@/store';
 import { setupGlobDirectives } from '/@/directives';
 import { setupI18n } from '/@/locales/setupI18n';
 import { registerGlobComp } from '/@/components/registerGlobComp';
+import eventBusPlugin from '/@/plugins/eventBusPlugin';
 
 async function bootstrap() {
   const app = createApp(App);
+
+  app.use(eventBusPlugin);
 
   // Configure store
   setupStore(app);

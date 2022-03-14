@@ -32,36 +32,51 @@
 </template>
 
 <script setup lang="tsx" name="TaskEditForm">
-  import { h, onUpdated, ref, toRaw, toRefs } from 'vue';
+  import {
+    h,
+    onMounted,
+    watchEffect,
+    inject,
+    computed,
+    ref,
+    Ref,
+    toRaw,
+    getCurrentInstance,
+  } from 'vue';
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { MarkDownEditor } from '/@/views/components/MarkDownEditor';
   import { Icon } from '/@/components/Icon';
+  import { useMessage } from '/@/hooks/web/useMessage';
   import { storeToRefs } from 'pinia';
   import { useCertStore } from '/@/store/modules/cert';
   import { emptyTaskModel, TaskModel } from '/@/api/cert/model/taskModel';
-  import { getCertTaskByTaskNo } from '/@/api/cert/task';
+  import { getCertTaskByTaskNo, updateCertTask, insertCertTask } from '/@/api/cert/task';
   import { CategoryModel } from '/@/api/cert/model/categoryModel';
   import { getCertCategoriesByRegion } from '/@/api/cert/category';
   import { InternalNamePath, ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
 
-  const props = defineProps({
-    taskNo: {
-      type: String,
-      default: 'new',
-    },
-  });
+  let { proxy } = getCurrentInstance();
 
-  const { taskNo } = toRefs(props);
+  const taskNo: Ref<string | undefined> = inject('editingTaskNo') as Ref<string | undefined>;
+
+  const { notification } = useMessage();
   const certNames = ref<Array<{ value: string; label: string }>>([]);
-  onUpdated(async () => {
+  let taskInfo: TaskModel; // 任务原始信息
+
+  const loadTask = async () => {
+    if (!taskNo.value) return;
     if (taskNo.value === 'new') {
-      await setFieldsValue(emptyTaskModel);
+      taskInfo = emptyTaskModel;
+      await setFieldsValue(taskInfo);
     } else {
-      const taskInfo: TaskModel = await toRaw(getCertTaskByTaskNo(taskNo.value));
+      taskInfo = await toRaw(getCertTaskByTaskNo(taskNo.value));
       await setFieldsValue({ ...taskInfo });
       await updateCertNames(taskInfo.region[1]);
     }
-  });
+    await clearValidate();
+  };
+
+  onMounted(() => watchEffect(() => loadTask()));
 
   const updateCertNames = async (region) => {
     const categories: CategoryModel[] = await getCertCategoriesByRegion(region);
@@ -77,7 +92,8 @@
   };
 
   const certStore = useCertStore();
-  const { getRegionOptions, certMethodMap, taskStatMap } = storeToRefs(certStore);
+  certStore.init();
+  const { getRegionOptions, certMethodMap, taskStats } = storeToRefs(certStore);
 
   const schemas: FormSchema[] = [
     {
@@ -102,7 +118,8 @@
       },
       component: 'Select',
       componentProps: {
-        options: taskStatMap,
+        options: taskStats,
+        disabled: computed(() => taskNo.value === 'new'),
       },
     },
     {
@@ -156,7 +173,6 @@
       component: 'InputNumber',
       componentProps: {
         min: 0,
-        precision: 2,
         formatter: (value) => `￥ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
         parser: (value) => value.replace(/￥\s?|(,*)/g, ''),
         onClick(e) {
@@ -263,25 +279,43 @@
     },
   ];
 
-  const [register, { setFieldsValue, validate, getFieldsValue, scrollToField }] = useForm({
-    labelWidth: 150,
-    schemas,
-    actionColOptions: {
-      span: 24,
-    },
-    fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
-    // showAdvancedButton: true,
-    // alwaysShowLines: 3,
-    // autoAdvancedLine: 100,
-    showResetButton: false,
-    showSubmitButton: false,
-  });
+  const [register, { setFieldsValue, validate, clearValidate, getFieldsValue, scrollToField }] =
+    useForm({
+      labelWidth: 150,
+      schemas,
+      actionColOptions: {
+        span: 24,
+      },
+      fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+      // showAdvancedButton: true,
+      // alwaysShowLines: 3,
+      // autoAdvancedLine: 100,
+      showResetButton: false,
+      showSubmitButton: false,
+    });
 
   const validErrors = ref<{ name: InternalNamePath; errors: string[] }[]>([]);
   const handleSubmit = async () => {
     try {
       await validate();
       validErrors.value = [];
+      let pass;
+      taskInfo = { ...taskInfo, ...getFieldsValue() };
+      if (taskNo?.value === 'new') {
+        pass = await insertCertTask(taskInfo);
+        notification.success({
+          message: '新建任务成功',
+          description: `任务 ${pass.taskNo} 新建成功`,
+        });
+        taskNo.value = pass.taskNo;
+      } else {
+        pass = await updateCertTask(taskInfo);
+        notification.success({
+          message: '新建任务成功',
+          description: `任务 ${pass.taskNo} 更新成功`,
+        });
+      }
+      proxy.$bus.emit('TASK_UPDATE', taskInfo);
     } catch (e) {
       const err = e as ValidateErrorEntity;
       console.log(err);
@@ -290,11 +324,12 @@
   };
 
   const handleCancel = () => {
-    console.log('cancelling edit');
+    setFieldsValue(taskInfo);
   };
 
   const print = () => {
-    console.log('Fields: ', getFieldsValue());
+    // console.log('Fields: ', getFieldsValue());
+    taskNo.value = 'xxx';
   };
 </script>
 
