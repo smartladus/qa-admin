@@ -59,29 +59,29 @@ const transform: AxiosTransform = {
 
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
     // 如果不希望中断当前请求，请return数据，否则直接抛出异常即可
-    let timeoutMsg = '';
+    let errMsg = '';
     switch (code) {
       case ResultEnum.TIMEOUT:
-        timeoutMsg = t('sys.api.timeoutMessage');
+        errMsg = t('sys.api.timeoutMessage');
         const userStore = useUserStoreWithOut();
         userStore.setToken(undefined);
         userStore.logout(true);
         break;
       default:
         if (message) {
-          timeoutMsg = message;
+          errMsg = message;
         }
     }
 
     // errorMessageMode=‘modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
     // errorMessageMode='none' 一般是调用时明确表示不希望自动弹出错误提示
     if (options.errorMessageMode === 'modal') {
-      createErrorModal({ title: t('sys.api.errorTip'), content: timeoutMsg });
+      createErrorModal({ title: t('sys.api.errorTip'), content: errMsg });
     } else if (options.errorMessageMode === 'message') {
-      createMessage.error(timeoutMsg);
+      createMessage.error(`ErrCode: ${code}, Msg: ${errMsg}`);
     }
 
-    throw new Error(timeoutMsg || t('sys.api.apiRequestFailed'));
+    throw new Error(errMsg || t('sys.api.apiRequestFailed'));
   },
 
   // 请求之前处理config
