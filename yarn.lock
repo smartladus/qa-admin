@@ -3483,7 +3483,7 @@ commander@*:
   resolved "https://registry.npmmirror.com/commander/-/commander-9.0.0.tgz#86d58f24ee98126568936bd1d3574e0308a99a40"
   integrity sha512-JJfP2saEKbQqvW+FI93OYUB4ByV5cizMpFMiiJI8xDbBvQvSkIk0VvQdn1CZ8mqAO8Loq2h0gYTYtDFUZUeERw==
 
-commander@^2.20.0, commander@^2.8.1:
+commander@^2.20.0, commander@^2.20.3, commander@^2.8.1:
   version "2.20.3"
   resolved "https://registry.npmmirror.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
@@ -3936,6 +3936,11 @@ cssesc@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmmirror.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
+
+cssfilter@0.0.10:
+  version "0.0.10"
+  resolved "https://registry.npmmirror.com/cssfilter/-/cssfilter-0.0.10.tgz#c6d2672632a2e5c83e013e6864a42ce8defd20ae"
+  integrity sha512-FAaLDaplstoRsDR8XGYH51znUN0UY7nMc6Z9/fvE8EXGwvJE9hu7W2vHwx1+bd6gCYnln9nLbzxFTrcO9YQDZw==
 
 csso@^4.2.0:
   version "4.2.0"
@@ -5854,6 +5859,16 @@ header-case@^2.0.4:
     capital-case "^1.0.4"
     tslib "^2.0.3"
 
+highlight.js-async-webpack@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.npmmirror.com/highlight.js-async-webpack/-/highlight.js-async-webpack-1.0.4.tgz#c06b67bf99f049045d62b756e5855b0912ec616c"
+  integrity sha512-IC0AwUgNr7BU8pqheaCEvOQvOtIZwO3I4rtbmT489Ndz8loE31IRmBmT6C4qDCbfZjzNO+k2w3VceZjTQ3JQ8Q==
+
+highlight.js@^9.11.0:
+  version "9.18.5"
+  resolved "https://registry.npmmirror.com/highlight.js/-/highlight.js-9.18.5.tgz#d18a359867f378c138d6819edfc2a8acd5f29825"
+  integrity sha512-a5bFyofd/BHCX52/8i8uJkjr9DYwXIPnM/plwI6W7ezItLGqzt7X2G2nXuYSfsIJdkwwj/g9DG1LkcGJI/dDoA==
+
 homedir-polyfill@^1.0.1:
   version "1.0.3"
   resolved "https://registry.npmmirror.com/homedir-polyfill/-/homedir-polyfill-1.0.3.tgz#743298cef4e5af3e194161fbadcc2151d3a058e8"
@@ -7653,6 +7668,15 @@ mathml-tag-names@^2.1.3:
   resolved "https://registry.npmmirror.com/mathml-tag-names/-/mathml-tag-names-2.1.3.tgz#4ddadd67308e780cf16a47685878ee27b736a0a3"
   integrity sha512-APMBEanjybaPzUrfqU0IMU5I0AswKMH7k8OTLs0vvV4KZpExkTkY87nR/zpbuTPj+gARop7aGUbl11pnDfW6xg==
 
+mavon-editor@3.0.0-beta:
+  version "3.0.0-beta"
+  resolved "https://registry.npmmirror.com/mavon-editor/-/mavon-editor-3.0.0-beta.tgz#47073f7daaf7e1bf1e265ed97055a69f3b65fcba"
+  integrity sha512-cmGKbkgrlvFtrhEVyEUIO2X30R+0p0cWpWcYZ97p2E7zn5flKakgv3gq/4mrzjb6UTmhUiHis38k+a6fP6XUEQ==
+  dependencies:
+    highlight.js "^9.11.0"
+    highlight.js-async-webpack "^1.0.4"
+    xss "^1.0.6"
+
 mdn-data@2.0.14:
   version "2.0.14"
   resolved "https://registry.npmmirror.com/mdn-data/-/mdn-data-2.0.14.tgz#7113fc4281917d63ce29b43446f701e68c25ba50"
@@ -7826,6 +7850,11 @@ minimist@1.2.5, minimist@^1.1.3, minimist@^1.2.0, minimist@^1.2.5:
   resolved "https://registry.npmmirror.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
+mitt@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmmirror.com/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
+
 mixin-deep@^1.2.0:
   version "1.3.2"
   resolved "https://registry.npmmirror.com/mixin-deep/-/mixin-deep-1.3.2.tgz#1120b43dc359a785dce65b55b82e257ccf479566"
@@ -7845,6 +7874,11 @@ modify-values@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmmirror.com/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
   integrity sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==
+
+moment@^2.29.1:
+  version "2.29.1"
+  resolved "https://registry.npmmirror.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
 
 mousetrap@^1.6.5:
   version "1.6.5"
@@ -11506,6 +11540,14 @@ xmlchars@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npmmirror.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
+
+xss@^1.0.6:
+  version "1.0.10"
+  resolved "https://registry.npmmirror.com/xss/-/xss-1.0.10.tgz#5cd63a9b147a755a14cb0455c7db8866120eb4d2"
+  integrity sha512-qmoqrRksmzqSKvgqzN0055UFWY7OKx1/9JWeRswwEVX9fCG5jcYRxa/A2DHcmZX6VJvjzHRQ2STeeVcQkrmLSw==
+  dependencies:
+    commander "^2.20.3"
+    cssfilter "0.0.10"
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"
