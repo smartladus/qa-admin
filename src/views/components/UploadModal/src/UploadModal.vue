@@ -49,7 +49,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { downloadByUrl } from '/@/utils/file/download';
   import { UploadChangeParam } from 'ant-design-vue';
-  import { UploadApi } from '/@/views/components/UploadModal';
+  import { UploadApi } from '/@/api/sys/model/uploadModel';
 
   const {
     createMessage: { warning },
@@ -123,7 +123,7 @@
           ((e) =>
             console.log(`onUploadProgress is not set, this is default function, event: ${e}`)),
       });
-      console.log(res);
+      // console.log(res);
       notification.success({
         message: '文件上传成功',
         description:
