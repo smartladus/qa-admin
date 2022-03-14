@@ -104,13 +104,6 @@ const columns: BasicColumn[] = [
     width: 200,
     align: 'center',
   },
-  {
-    width: 170,
-    title: '操作',
-    dataIndex: 'action',
-    slots: { customRender: 'action' },
-    fixed: 'right',
-  },
 ];
 
 const tableProps: Partial<BasicTableProps> = {
@@ -123,6 +116,12 @@ const tableProps: Partial<BasicTableProps> = {
   },
   columns,
   api: getAllCertTasks,
+  actionColumn: {
+    width: 170,
+    title: '操作',
+    dataIndex: 'action',
+    slots: { customRender: 'action' },
+  },
 };
 
 const createEditMessage = function (task: TaskModel): string {
