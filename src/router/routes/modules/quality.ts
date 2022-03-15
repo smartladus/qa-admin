@@ -17,11 +17,35 @@ const quality: AppRouteModule = {
     {
       path: 'suppliers',
       name: 'Suppliers',
-      component: () => import('/@/views/quality/supplier/index.vue'),
+      component: () => import('/@/views/quality/suppliers/index.vue'),
       meta: {
         title: t('routes.quality.supplier'),
       },
     },
+    {
+      path: 'delivery',
+      name: 'Delivery',
+      component: () => import('/@/views/quality/delivery/index.vue'),
+      meta: {
+        title: t('routes.quality.delivery'),
+      },
+    },
+    {
+      path: 'services',
+      name: 'Services',
+      component: () => import('/@/views/quality/services/index.vue'),
+      meta: {
+        title: t('routes.quality.service'),
+      },
+    },
+    {
+      path: 'issues',
+      name: 'Issues',
+      component: () => import('/@/views/quality/issues/index.vue'),
+      meta: {
+        title: t('routes.quality.issue'),
+      },
+    }
   ],
 };
 
