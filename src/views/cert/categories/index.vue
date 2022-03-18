@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Categories">
+<script setup lang="ts">
   import { ref, onMounted } from 'vue';
 
   import CategoryTable from '/@/views/cert/categories/CategoryTable/CategoryTable.vue';

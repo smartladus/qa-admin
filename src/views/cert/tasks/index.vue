@@ -11,7 +11,7 @@
           <span>{{ task.oaNo ?? '-' }}</span>
         </template>
         <template v-if="column.key === 'cost'">
-          <span>￥ {{ numberFormat(task.cost) }}</span>
+          <div style="text-align: end">￥ {{ numberFormat(task.cost, 2) }}</div>
         </template>
         <template v-if="column.key === 'region'">
           <span>{{ task.region[1] ?? '未知区域' }}</span>
@@ -64,7 +64,7 @@
   </PageWrapper>
 </template>
 
-<script setup lang="ts" name="Tasks">
+<script setup lang="ts">
   import { getCurrentInstance, provide, ref } from 'vue';
   import { PageWrapper } from '/@/components/Page';
   import { TaskModel } from '/@/api/cert/model/taskModel';
@@ -81,17 +81,15 @@
     EditRecordRow,
     useTable,
   } from '/@/components/Table';
-  import { useFilter } from '/@/hooks/useFilter';
   import { useCertStore } from '/@/store/modules/cert';
   import { storeToRefs } from 'pinia';
   import { deleteCertTaskByTaskNo } from '/@/api/cert/task';
+  import { numberFormat, replaceDivider, dateFormat } from '/@/utils/filter';
 
   let { proxy } = getCurrentInstance();
   const { notification } = useMessage();
 
   const [register, { reload }] = useTable({});
-
-  const { numberFormat, replaceDivider, dateFormat } = useFilter();
 
   const certStore = useCertStore();
   certStore.init();

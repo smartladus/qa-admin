@@ -4,7 +4,7 @@
   </PageWrapper>
 </template>
 
-<script setup lang="ts" name="services">
+<script setup lang="ts">
   import { PageWrapper } from '/@/components/Page';
 </script>
 

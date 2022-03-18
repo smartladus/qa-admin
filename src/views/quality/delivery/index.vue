@@ -2,7 +2,7 @@
   <PageWrapper>出货记录</PageWrapper>
 </template>
 
-<script setup lang="ts" name="delivery">
+<script setup lang="ts">
   import { PageWrapper } from '/@/components/Page';
 </script>
 
