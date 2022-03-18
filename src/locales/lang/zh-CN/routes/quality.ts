@@ -4,4 +4,6 @@ export default {
   issue: '质量问题',
   service: '售后服务',
   delivery: '出货记录',
+  analysis: '质量分析图表',
+  product: '产品池',
 };

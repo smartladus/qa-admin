@@ -65,13 +65,11 @@
     insertCertTaskRecord,
   } from '/@/api/cert/taskRecord';
   import { TaskRecordModel } from '/@/api/cert/model/taskRecordModel';
-  import { useFilter } from '/@/hooks/useFilter';
+  import { dateFormat } from '/@/utils/filter';
   import { TaskStat } from '/@/api/cert/model/taskModel';
   import { useCertStore } from '/@/store/modules/cert';
   import { storeToRefs } from 'pinia';
   import TaskStatTag from '../TaskStatTag/TaskStatTag.vue';
-
-  const { numberFormat, replaceDivider, dateFormat } = useFilter();
 
   const certStore = useCertStore();
   const { taskStats } = storeToRefs(certStore);

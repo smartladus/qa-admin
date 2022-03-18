@@ -7,13 +7,29 @@ const quality: AppRouteModule = {
   path: '/quality',
   name: 'Quality',
   component: LAYOUT,
-  redirect: '/quality/suppliers',
+  redirect: '/quality/analysis',
   meta: {
     orderNo: 2,
     icon: 'ant-design:safety-certificate',
     title: t('routes.quality.quality'),
   },
   children: [
+    {
+      path: 'analysis',
+      name: 'QualityAnalysis',
+      component: () => import('/@/views/quality/analysis/index.vue'),
+      meta: {
+        title: t('routes.quality.analysis'),
+      },
+    },
+    {
+      path: 'products',
+      name: 'ProductPool',
+      component: () => import('/@/views/quality/productPool/index.vue'),
+      meta: {
+        title: t('routes.quality.product'),
+      },
+    },
     {
       path: 'suppliers',
       name: 'Suppliers',
@@ -45,7 +61,7 @@ const quality: AppRouteModule = {
       meta: {
         title: t('routes.quality.issue'),
       },
-    }
+    },
   ],
 };
 

@@ -11,62 +11,52 @@ const columns: BasicColumn[] = [
     dataIndex: 'taskNo',
     width: 220,
     fixed: 'left',
-    align: 'center',
   },
   {
     title: '外部认证申请单号',
     dataIndex: 'oaNo',
     width: 200,
-    align: 'center',
   },
   {
     title: '认证费用',
     dataIndex: 'cost',
     width: 150,
-    align: 'right',
     sorter: (a: TaskModel, b: TaskModel) => a.cost - b.cost,
   },
   {
     title: '费用承担方',
     dataIndex: 'costBearer',
     width: 150,
-    align: 'center',
   },
   {
     title: '供应商',
     dataIndex: 'supName',
     width: 120,
-    align: 'center',
   },
   {
     title: '认证区域',
     dataIndex: 'region',
     width: 100,
-    align: 'center',
   },
   {
     title: '认证类型',
     dataIndex: 'certName',
     width: 120,
-    align: 'center',
   },
   {
     title: '获证方式',
     dataIndex: 'certMethod',
     width: 120,
-    align: 'center',
   },
   {
     title: '获证方式说明',
     dataIndex: 'certMethodDesc',
     width: 150,
-    align: 'center',
   },
   {
     title: '证书归属',
     dataIndex: 'certOwner',
     width: 100,
-    align: 'center',
   },
   {
     title: '供应商型号范围',
@@ -84,25 +74,21 @@ const columns: BasicColumn[] = [
     title: '任务状态',
     dataIndex: 'taskStat',
     width: 100,
-    align: 'center',
   },
   {
     title: '开始时间',
     dataIndex: 'startDate',
     width: 120,
-    align: 'center',
   },
   {
     title: '完成时间',
     dataIndex: 'endDate',
     width: 120,
-    align: 'center',
   },
   {
     title: '证书编号',
     dataIndex: 'certNo',
     width: 200,
-    align: 'center',
   },
 ];
 
