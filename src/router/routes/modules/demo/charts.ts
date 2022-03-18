@@ -7,7 +7,7 @@ const charts: AppRouteModule = {
   path: '/charts',
   name: 'Charts',
   component: LAYOUT,
-  redirect: '/charts/echarts/map',
+  redirect: '/analysis/echarts/map',
   meta: {
     orderNo: 500,
     icon: 'ion:bar-chart-outline',
@@ -46,7 +46,7 @@ const charts: AppRouteModule = {
       meta: {
         title: 'Echarts',
       },
-      redirect: '/charts/echarts/map',
+      redirect: '/analysis/echarts/map',
       children: [
         {
           path: 'map',
