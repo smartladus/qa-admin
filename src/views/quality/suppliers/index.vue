@@ -70,6 +70,10 @@
   } from '/@/components/Table';
   import { SupplierModel } from '/@/api/quality/model/supplierModel';
   import { percent } from '/@/utils/filter';
+  import { deleteSupplierById } from '/@/api/quality/supplier';
+  import { useMessage } from '/@/hooks/web/useMessage';
+
+  const { notification } = useMessage();
 
   const [register, { reload }] = useTable({});
 
@@ -100,12 +104,12 @@
 
   const handleDelete = async (supplier: Recordable<SupplierModel>) => {
     console.log(`deleting ${supplier.abbr}`);
-    // let count = await deleteCertTaskByTaskNo(task.taskNo);
-    // notification.success({
-    //   message: `成功删除 ${count} 条记录`,
-    //   description: `${task.taskNo} 已删除`,
-    // });
-    // await reload();
+    let count = await deleteSupplierById(supplier.id as unknown as string);
+    notification.success({
+      message: `成功删除 ${count} 条记录`,
+      description: `${supplier.abbr} 已删除`,
+    });
+    await reload();
   };
 </script>
 

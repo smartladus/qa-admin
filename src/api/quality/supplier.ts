@@ -12,6 +12,9 @@ enum Api {
 export const getAllSuppliers = (): Promise<SupplierModel[]> =>
   defHttp.get<SupplierModel[]>({ url: Api.SUPPLIER }, { urlPrefix });
 
+export const deleteSupplierById = (id: string) =>
+  defHttp.delete({ url: `${Api.SUPPLIER}/${id}` }, { urlPrefix });
+
 export const uploadSuppliers: UploadApi = (params: UploadParams) =>
   uploadFile(
     params.fileList,
