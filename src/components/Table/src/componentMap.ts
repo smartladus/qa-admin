@@ -8,6 +8,7 @@ import {
   DatePicker,
   TimePicker,
   Cascader,
+  AutoComplete,
 } from 'ant-design-vue';
 import type { ComponentType } from './types/componentType';
 import { ApiSelect, ApiTreeSelect } from '/@/components/Form';
@@ -18,6 +19,7 @@ componentMap.set('Input', Input);
 componentMap.set('InputNumber', InputNumber);
 componentMap.set('Select', Select);
 componentMap.set('ApiSelect', ApiSelect);
+componentMap.set('AutoComplete', AutoComplete);
 componentMap.set('ApiTreeSelect', ApiTreeSelect);
 componentMap.set('Switch', Switch);
 componentMap.set('Checkbox', Checkbox);
