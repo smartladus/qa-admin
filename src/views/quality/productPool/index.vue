@@ -8,17 +8,17 @@
     >
       <template #bodyCell="{ column, record: product }">
         <template v-if="column.key === 'size'">
-          {{ product?.size?.join(', ') ?? '-' }}
+          {{ product?.size?.map((size) => size + '"').join(', ') ?? '-' }}
         </template>
         <template v-if="column.key === 'tags'">
-          <div class="typeContainer">
-            <a-tag v-for="tag in product.tags" :key="tag" color="processing" class="certType">
+          <div class="tag-container-cell">
+            <a-tag v-for="tag in product.tags" :key="tag" color="processing" class="child-tag">
               {{ tag }}
             </a-tag>
           </div>
         </template>
         <template v-if="column.key === 'description'">
-          <div class="text-start">{{ product.description }}</div>
+          <div class="text-start-cell">{{ product.description }}</div>
         </template>
       </template>
       <template #action="{ record, column }">
@@ -85,22 +85,6 @@
 </script>
 
 <style scoped>
-  .typeContainer {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .typeContainer .certType {
-    min-width: 48px;
-    display: block;
-    margin: 4px;
-  }
-  .text-start {
-    text-align: start;
-    white-space: normal;
-    word-break: break-all;
-    word-wrap: break-word;
-  }
   /deep/ .ant-descriptions-row > td {
     padding-bottom: 0;
   }

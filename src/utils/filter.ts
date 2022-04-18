@@ -7,7 +7,7 @@ export function numberFormat(val: string | number, fractionDigits = 0): string {
   const integer = num.split('.')[0].replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
   // 取出小数点部分
   const decimal = num.lastIndexOf('.') === -1 ? '' : num.split('.')[1];
-  return `${integer}.${decimal}`;
+  return fractionDigits === 0 ? `${integer}` : `${integer}.${decimal}`;
 }
 
 export function replaceDivider(srcTxt: string, divider: string, newDivider: string): string {

@@ -22,7 +22,6 @@ const columns: BasicColumn[] = [
     title: '区域',
     dataIndex: 'region',
     width: 120,
-    align: 'center',
     fixed: 'left',
     editRow: true,
     editComponent: 'Cascader',
@@ -38,7 +37,6 @@ const columns: BasicColumn[] = [
     title: '认证名称',
     dataIndex: 'certName',
     width: 120,
-    align: 'center',
     fixed: 'left',
     editRow: true,
     editRule: async (text) => {
@@ -49,7 +47,6 @@ const columns: BasicColumn[] = [
     title: '认证大类',
     dataIndex: 'type',
     width: 150,
-    align: 'center',
     editRow: true,
     editComponent: 'Select',
     editComponentProps: {
@@ -63,7 +60,7 @@ const columns: BasicColumn[] = [
   {
     title: '是否强制',
     dataIndex: 'compulsory',
-    width: 100,
+    width: 60,
     align: 'center',
     editRow: true,
     editComponent: 'Switch',
@@ -71,37 +68,72 @@ const columns: BasicColumn[] = [
   {
     title: '国内测试',
     dataIndex: 'testDomestic',
-    width: 100,
-    align: 'center',
+    width: 60,
+    editRow: true,
+    editComponent: 'Switch',
   },
   {
-    title: '持证要求',
-    dataIndex: 'holdRequirement',
+    title: '持证方',
+    dataIndex: 'holder',
     width: 120,
-    align: 'center',
+    editRow: true,
   },
   {
     title: '样机数量',
     dataIndex: 'sampleQty',
-    width: 100,
-    align: 'center',
+    width: 60,
+    editRow: true,
+    editRule: async (val) => {
+      return isNaN(Number(val)) ? '请输入数值！' : '';
+    },
+    editComponent: 'InputNumber',
+    editComponentProps: {
+      min: 0,
+      precision: 0,
+    },
   },
   {
     title: '参考周期',
     dataIndex: 'timeCost',
-    width: 100,
-    align: 'center',
+    width: 80,
+    editRow: true,
+    editRule: async (val) => {
+      return isNaN(Number(val)) ? '请输入数值！' : '';
+    },
+    editComponent: 'InputNumber',
+    editComponentProps: {
+      min: 0,
+      precision: 0,
+      formatter: (val) => `${val} 周`,
+      parser: (val) => val.replace(' 周', ''),
+    },
   },
   {
-    title: '价格参考',
+    title: '参考价格',
     dataIndex: 'cost',
     width: 100,
-    align: 'center',
+    editRow: true,
+    editRule: async (val) => {
+      return isNaN(Number(val)) ? '请输入数值！' : '';
+    },
+    editComponent: 'InputNumber',
+    editComponentProps: {
+      min: 0,
+      precision: 0,
+      controls: false,
+      formatter: (val) => `￥ ${val}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      parser: (val) => val.replace(/￥\s?|(,*)/g, ''),
+    },
   },
   {
     title: '备注',
     dataIndex: 'comments',
-    align: 'left',
+    width: 250,
+    editRow: true,
+    editComponent: 'InputTextArea',
+    editComponentProps: {
+      style: { textAlign: 'start' },
+    },
   },
 ];
 

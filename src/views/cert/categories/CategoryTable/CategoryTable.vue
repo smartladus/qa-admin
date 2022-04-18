@@ -15,13 +15,8 @@
         {{ record.region[1] }}
       </template>
       <template v-if="column.key === 'type' && !record.editable">
-        <div class="typeContainer" v-if="record.type && record.type.length > 0">
-          <a-tag
-            v-for="type in record.type"
-            :key="type"
-            color="processing"
-            class="certType"
-          >
+        <div class="tag-container-cell" v-if="record.type && record.type.length > 0">
+          <a-tag v-for="type in record.type" :key="type" color="processing" class="child-tag">
             {{ type }}
           </a-tag>
         </div>
@@ -31,8 +26,19 @@
           <Icon :icon="record.compulsory ? 'mdi:circle-slice-8' : 'mdi:circle-outline'" />
         </a-space>
       </template>
-      <template v-if="column.key === 'test_domestic'">
-
+      <template v-if="column.key === 'testDomestic' && !record.editable">
+        <a-space>
+          <Icon :icon="record.testDomestic ? 'mdi:circle-slice-8' : 'mdi:circle-outline'" />
+        </a-space>
+      </template>
+      <template v-if="column.key === 'timeCost' && !record.editable">
+        {{ record.timeCost }} 周
+      </template>
+      <template v-if="column.key === 'cost' && !record.editable">
+        <div style="text-align: end">￥ {{ numberFormat(record.cost) }}</div>
+      </template>
+      <template v-if="column.key === 'comments' && !record.editable">
+        <div class="text-start-cell">{{ record.comments }}</div>
       </template>
     </template>
     <template #selectedItem="{ row: category }">
@@ -46,6 +52,7 @@
   import categoryTableConfig from '/@/views/cert/categories/CategoryTable/categoryTableConfig';
   import { Icon } from '/@/components/Icon';
   import { useTable } from '/@/components/Table';
+  import { numberFormat } from '/@/utils/filter';
 
   const emit = defineEmits(['changeTable']);
 
@@ -67,15 +74,4 @@
   };
 </script>
 
-<style scoped>
-  .typeContainer {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .typeContainer .certType {
-    min-width: 48px;
-    display: block;
-    margin: 4px;
-  }
-</style>
+<style scoped></style>

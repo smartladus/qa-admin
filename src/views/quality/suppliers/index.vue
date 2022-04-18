@@ -8,12 +8,12 @@
     >
       <template #bodyCell="{ column, record: supplier }">
         <template v-if="column.key === 'mainProducts'">
-          <div class="typeContainer">
+          <div class="tag-container-cell">
             <a-tag
               v-for="type in supplier.mainProducts"
               :key="type"
               color="processing"
-              class="certType"
+              class="child-tag"
             >
               {{ type }}
             </a-tag>
@@ -30,20 +30,20 @@
         <template v-if="column.key === 'companyInfoZh'">
           <a-descriptions size="small" :column="1">
             <a-descriptions-item label="公司名称">
-              <div class="text-start">{{ supplier.compNameZh }}</div>
+              <div class="text-start-cell">{{ supplier.compNameZh }}</div>
             </a-descriptions-item>
             <a-descriptions-item label="公司地址">
-              <div class="text-start">{{ supplier.addressZh }}</div>
+              <div class="text-start-cell">{{ supplier.addressZh }}</div>
             </a-descriptions-item>
           </a-descriptions>
         </template>
         <template v-if="column.key === 'companyInfoEn'">
           <a-descriptions size="small" :column="1">
             <a-descriptions-item label="公司名称">
-              <div class="text-start">{{ supplier.compNameEn }}</div>
+              <div class="text-start-cell">{{ supplier.compNameEn }}</div>
             </a-descriptions-item>
             <a-descriptions-item label="公司地址">
-              <div class="text-start">{{ supplier.addressEn }}</div>
+              <div class="text-start-cell">{{ supplier.addressEn }}</div>
             </a-descriptions-item>
           </a-descriptions>
         </template>
@@ -114,22 +114,6 @@
 </script>
 
 <style scoped>
-  .typeContainer {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .typeContainer .certType {
-    min-width: 48px;
-    display: block;
-    margin: 4px;
-  }
-  .text-start {
-    text-align: start;
-    white-space: normal;
-    word-break: break-all;
-    word-wrap: break-word;
-  }
   /deep/ .ant-descriptions-row > td {
     padding-bottom: 0;
   }

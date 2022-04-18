@@ -23,6 +23,14 @@ const cert: AppRouteModule = {
       },
     },
     {
+      path: 'certifications',
+      name: 'Certifications',
+      component: () => import('/@/views/cert/certificates/index.vue'),
+      meta: {
+        title: t('routes.cert.certificates'),
+      },
+    },
+    {
       path: 'categories',
       name: 'Category',
       component: () => import('/@/views/cert/categories/index.vue'),

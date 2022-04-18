@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts" name="UploadModal">
-  import { defineExpose, defineProps, toRefs, ref, unref, toRaw, defineEmits, computed } from 'vue';
+  import { toRefs, ref, unref, toRaw, defineEmits, computed } from 'vue';
   import { Icon } from '/@/components/Icon';
   import { BasicModal } from '/@/components/Modal';
   import { useMessage } from '/@/hooks/web/useMessage';
