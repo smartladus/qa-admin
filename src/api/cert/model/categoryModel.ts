@@ -5,7 +5,7 @@ export type CategoryModel = {
   type: string[];
   compulsory: boolean;
   testDomestic?: boolean;
-  holdRequirement?: string;
+  holder?: string;
   sampleQty?: number;
   timeCost?: string;
   cost?: number;
@@ -19,7 +19,7 @@ export const emptyCategoryModel: CategoryModel = {
   type: [],
   compulsory: false,
   testDomestic: false,
-  holdRequirement: '',
+  holder: '',
   sampleQty: 0,
   timeCost: '',
   cost: 0,
