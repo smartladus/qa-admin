@@ -9,4 +9,5 @@ export type ComponentType =
   | 'Switch'
   | 'DatePicker'
   | 'TimePicker'
-  | 'Cascader';
+  | 'Cascader'
+  | 'InputTextArea';

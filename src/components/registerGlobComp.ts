@@ -28,6 +28,7 @@ import {
   Timeline,
   Descriptions,
 } from 'ant-design-vue';
+import VueGridLayout from 'vue-grid-layout';
 import MavonEditor from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
 
@@ -60,5 +61,6 @@ export function registerGlobComp(app: App) {
     .use(Typography)
     .use(DatePicker)
     .use(Timeline)
-    .use(Descriptions);
+    .use(Descriptions)
+    .use(VueGridLayout);
 }

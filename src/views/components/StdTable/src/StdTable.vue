@@ -82,7 +82,7 @@
 </template>
 
 <script setup lang="ts" name="StdTable">
-  import { ref, defineProps, defineExpose, computed, ComputedRef, toRefs, nextTick } from 'vue';
+  import { ref, computed, ComputedRef, toRefs, nextTick } from 'vue';
   import {
     ActionItem,
     BasicColumn,
