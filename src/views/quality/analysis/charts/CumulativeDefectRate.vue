@@ -1,6 +1,6 @@
 <template>
-  <a-card size="small" title="累计不良率">
-    <div :id="chartId" style="height: 300px"></div>
+  <a-card size="small" title="累计不良率" style="height: 100%">
+    <div :id="chartId" style="height: 100%"></div>
   </a-card>
 </template>
 
@@ -84,5 +84,7 @@
 </script>
 
 <style scoped>
-
+  /deep/ .ant-card-body {
+    height: calc(100% - 38px);
+  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <a-card size="small" title="故障期">
+  <a-card size="small" title="故障期" style="height: 100%">
     <template #extra>
       <a-switch
         checked-children="百分比"
@@ -8,13 +8,13 @@
         size="small"
       />
     </template>
-    <div :id="chartId" style="height: 300px"></div>
+    <div :id="chartId" style="height: 100%"></div>
   </a-card>
 </template>
 
 <script setup lang="ts" name="DefectAge">
   import { ref, onMounted, watchEffect } from 'vue';
-  import { buildUUID } from '/@/utils/uuid';
+  import { nanoid } from 'nanoid';
   import { getDefectAge } from '/@/api/quality/chart';
   import { Bar, BarOptions, G2 } from '@antv/g2plot';
   import { percent } from '/@/utils/filter';
@@ -24,7 +24,7 @@
     end: [{ trigger: 'interval:mouseleave', action: 'element-link-by-color:unlink' }],
   });
 
-  const chartId = ref(buildUUID());
+  const chartId = ref(nanoid());
   const checked = ref(true);
 
   const commonOption = {
@@ -72,5 +72,7 @@
 </script>
 
 <style scoped>
-
+  /deep/ .ant-card-body {
+    height: calc(100% - 38px);
+  }
 </style>
