@@ -26,3 +26,14 @@
 
 - 此时可能会出现文件冲突，用Github Desktop处理即可
 
+
+
+# Vue Grid Layout
+
+- Vue Grid Layout 不支持Vue3，通过以下版本安装
+
+  ```shell
+  yarn add vue-grid-layout@3.0.0-beta1
+  ```
+
+  
