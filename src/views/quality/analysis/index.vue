@@ -14,8 +14,7 @@
       :row-height="150"
       :is-draggable="true"
       :is-resizable="true"
-      :vertical-compact="false"
-      :is-mirrored="false"
+      :vertical-compact="true"
       :margin="[10, 10]"
       :use-css-transforms="true"
     >
@@ -73,7 +72,7 @@
     -webkit-columns: 160px;
     columns: 160px;
   }
-  /deep/ .vue-grid-item.vue-grid-placeholder {
+  :deep(.vue-grid-item.vue-grid-placeholder) {
     background: @primary-color !important;
   }
 </style>

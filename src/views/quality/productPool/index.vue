@@ -85,7 +85,7 @@
 </script>
 
 <style scoped>
-  /deep/ .ant-descriptions-row > td {
+  :deep(.ant-descriptions-row > td) {
     padding-bottom: 0;
   }
 </style>

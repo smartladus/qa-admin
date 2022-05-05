@@ -112,19 +112,16 @@
     min-height: 300px;
   }
 
-  /deep/ .editor ul {
+  :deep(.editor ul) {
     list-style-type: disc;
   }
 
-  /deep/ .editor ul ul,
-  /deep/ .editor ol ul {
-    list-style-type: circle;
-  }
-
-  /deep/ .editor ul ul ul,
-  /deep/ .editor ul ol ul,
-  /deep/ .editor ol ul ul,
-  /deep/ .editor ol ol ul {
+  :deep(editor ul ul),
+  :deep(editor ol ul),
+  :deep(editor ul ul ul),
+  :deep(editor ul ol ul),
+  :deep(editor ol ul ul),
+  :deep(editor ol ol ul) {
     list-style-type: circle;
   }
 </style>

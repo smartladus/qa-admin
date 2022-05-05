@@ -72,7 +72,7 @@
 </script>
 
 <style scoped>
-  /deep/ .ant-card-body {
+  :deep(.ant-card-body) {
     height: calc(100% - 38px);
   }
 </style>
